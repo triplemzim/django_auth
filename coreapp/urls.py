@@ -1,10 +1,11 @@
-from django.urls import path
-from coreapp.views import UserProfileViewSet
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from coreapp.views import UserProfileViewSet, AvatarUpdateView
 
-profile_list = UserProfileViewSet.as_view({"get": "list"})
-profile_detail = UserProfileViewSet.as_view({"get": "retrieve"})
+router = DefaultRouter()
+router.register(r"profiles", UserProfileViewSet)
 
 urlpatterns = [
-    path("profile/", profile_list, name="profile-list"),
-    path("profile/<str:pk>/", profile_detail, name = "profile-detail"),
+    path("", include(router.urls)),
+    path("avatar/", AvatarUpdateView.as_view(), name="avatar_update")
 ]
