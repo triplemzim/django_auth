@@ -25,3 +25,24 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product 
         fields = "__all__"
+
+class BalanceSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        self.fields['customer'] = CustomerSerializer(read_only=True)
+        return super().to_representation(instance)
+    
+
+    class Meta:
+        model = Balance
+        fields = '__all__'
+
+class StockSerializer(serializers.ModelSerializer):
+
+    def to_representation(self, instance):
+        self.fields['product'] = ProductSerializer(read_only=True)
+        self.fields['depot'] = DepotSerializer(read_only=True)
+        return super().to_representation(instance)
+
+    class Meta:
+        model = Stock
+        fields = '__all__'
