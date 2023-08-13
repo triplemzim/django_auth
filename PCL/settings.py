@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^_0ro)nh4%4abbd(lfn#lt2^h)i!ym$@0tnke)!%+3l&xbpl9l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '*']
 
 
 # Application definition
@@ -151,6 +151,8 @@ REST_FRAMEWORK = {
     ),
     "DATE_INPUT_FORMATS": ["%d/%m/%Y"],
     "DATETIME_FORMAT": "%d-%m-%Y %H:%M:%S.%fZ",
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
 }
 
 SITE_ID = 1

@@ -37,6 +37,25 @@ class StockModel(admin.ModelAdmin):
     search_fields = ('depot__name', 'product__name')
     autocomplete_fields = ('depot', 'product')
 
+
+class LineItemInline(admin.TabularInline):
+    model = LineItem
+    extra = 1
+
+@admin.register(Invoice)
+class InvoiceAdmin(admin.ModelAdmin):
+    list_display = ('custom_invoice_id', 'customer_id', 'invoice_date', 'total_amount', 'payment_amount')
+    list_filter = ('payment_status',)
+    search_fields = ('custom_invoice_id', 'customer_id__name', 'invoice_date')
+    inlines = [LineItemInline]
+
+@admin.register(LineItem)
+class LineItemAdmin(admin.ModelAdmin):
+    list_display = ('line_item_id', 'invoice', 'product', 'quantity', 'unit_price', 'total_price')
+    list_filter = ('invoice__payment_status',)
+    search_fields = ('invoice__custom_invoice_id', 'product__name')
+
+
 # Register your models here.
 admin.site.register(Depot, DepotModel)
 admin.site.register(Customer, CustomerModel)
