@@ -11,7 +11,7 @@ router.register(r"balance", BalanceViewSet)
 router.register(r"stock", StockViewSet)
 router.register(r'invoices', InvoiceViewSet)
 router.register(r'lineitems', LineItemViewSet)
-router.register(r'fullinvoice', FullInvoiceView)
+router.register(r'fullinvoice', FullInvoiceView, basename='invoicewithlineitem')
 
 urlpatterns = [
     # path('create-invoice-lineitems/', CreateInvoiceWithLineItems.as_view(), name='create-invoice-lineitems'),

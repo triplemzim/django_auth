@@ -57,19 +57,6 @@ INSTALLED_APPS = [
     'sale',
 ]
 
-CORS_ALLOWED_ORIGINS = []
-CORS_ALLOW_ALL_ORIGINS: True
-from corsheaders.defaults import default_methods
-
-CORS_ALLOW_METHODS = (
-    *default_methods,
-    "POKE",
-) 
-from corsheaders.defaults import default_headers
-
-CORS_ALLOW_HEADERS = (
-    *default_headers,
-)
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -176,3 +163,6 @@ SITE_ID = 1
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_EMAIL_REQUIRED = (True)
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
